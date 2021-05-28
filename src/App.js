@@ -67,20 +67,23 @@ const App = () => {
 
   useEffect(() => {
     const match = determineMatch(boardState);
+    console.log("GAME MATCH RESULT: ", match);
     setTimeout(() => {
       if(boardState.length === 9 && !match){
         setBoardState([]);
       }else{
         if(match){
           setBoardState([]);
-          window.emojisplosion();
+          window.emojisplosion({
+            emojiCount: 100,
+          });
         }
         if(match === symbols.CROSS)
           setXScore(prev => prev + 1)
         if(match === symbols.CIRCLE)
           setOScore(prev => prev + 1)
       }
-    }, 2000);
+    }, 1000);
   }, [boardState])
 
   return (
