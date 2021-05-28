@@ -18,14 +18,18 @@ const LabelValueContainer = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    flex-grow: ${prop => prop.flexGrow};
 `;
 
 const LabelValue = ({
     label = '',
     value = undefined,
+    flexGrow = 1
 }) => {
     return (
-        <LabelValueContainer>
+        <LabelValueContainer
+            flexGrow={flexGrow}
+        >
             <span> {label} </span>
             { value }
         </LabelValueContainer>
@@ -56,9 +60,9 @@ const Invite = ({
                                         icon={<CopyClipboard />} />}
                         value={myId ? `${window.location.host}/?friend=${myId}` : `Generating connection...`}
                         readOnly
-                        width="300px"
                     />
                 }
+                flexGrow={10}
             />
         </InviteContainer>
     )

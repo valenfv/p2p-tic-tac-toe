@@ -20,6 +20,7 @@ const HomeLayout = styled.div`
 const Header = styled.div`
   grid-area: header;
   border-bottom: 3px dashed rgba(0, 0, 0, 0.15);
+  flex-wrap: wrap;
 `; 
 
 const Control = styled.div`

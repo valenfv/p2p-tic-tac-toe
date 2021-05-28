@@ -60,20 +60,25 @@ const App = () => {
   , [boardState]);
 
   useEffect(() => {
-    setBoardState(prev => [...prev.concat(update)]);
+    if(update){
+      setBoardState(prev => [...prev.concat(update)]);
+    } 
   }, [update])
 
   useEffect(() => {
     const match = determineMatch(boardState);
-    console.log("DALE VO", match);
-    if(match){
+    if(boardState.length === 9 && !match){
       setBoardState([]);
-      window.emojisplosion();
+    }else{
+      if(match){
+        setBoardState([]);
+        window.emojisplosion();
+      }
+      if(match === symbols.CROSS)
+        setXScore(prev => prev + 1)
+      if(match === symbols.CIRCLE)
+        setOScore(prev => prev + 1)
     }
-    if(match === symbols.CROSS)
-      setXScore(prev => prev + 1)
-    if(match === symbols.CIRCLE)
-      setOScore(prev => prev + 1)
   }, [boardState])
 
   return (

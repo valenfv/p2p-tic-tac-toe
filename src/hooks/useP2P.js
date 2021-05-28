@@ -8,7 +8,7 @@ export default (friendId, lastMove) => {
     const [status, setStatus] = useState(p2pStatus.NOT_CONNECTED);
     const [symbol, setSymbol] = useState(null);
     const [isTurn, setIsTurn] = useState(false);
-    const [update, setUpdate] = useState({});
+    const [update, setUpdate] = useState(null);
 
     // GENERATE A PEER ID
     useEffect(() => {

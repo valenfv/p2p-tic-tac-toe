@@ -59,7 +59,6 @@ const determineMatch = (boardState) => {
         for(let col = 1; col <= 3; col++){
             board[row - 1][col - 1] = getSymbolInfo(row, col, boardState);
         }
-    console.log("ESTE ES EL BOARD: ", board)
     const crossWinner =  isWinner(symbols.CROSS, board);
     const circleWinner =  isWinner(symbols.CIRCLE, board);
     
