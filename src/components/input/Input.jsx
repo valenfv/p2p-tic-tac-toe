@@ -12,6 +12,7 @@ const Input = React.memo(({
     disabled = false,
     readOnly = false,
     width = '100%',
+    ...other
 }) => (
     <InputContainer>
         <InputTag 
@@ -20,6 +21,7 @@ const Input = React.memo(({
             disabled={disabled}
             readOnly={readOnly}
             width={width}
+            {...other}
         />
         <RightIconContainer>
             { RightAddon }

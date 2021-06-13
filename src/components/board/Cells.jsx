@@ -20,13 +20,21 @@ const AnimationRendering = React.memo((props) => {
         </IconTransition> : Render;
 });
 
+const getAriaLabel = (cellSymbol, playerSymbol, row, col) => {
+    if(!cellSymbol && playerSymbol)
+        return `play a ${playerSymbol === symbols.CIRCLE ? `circle` : `cross`} on row ${row + 1} and column ${col + 1}`;
+    if(!playerSymbol)
+        return `board cell, waiting for a friend to connect`;
+    return `cell not available, there is currently a ${playerSymbol === symbols.CIRCLE ? `circle` : `cross`} in there`;
+}
 
 const Cells = React.memo(({ 
     rows, 
     cols, 
     boardState, 
     onClick, 
-    enabled 
+    enabled,
+    playerSymbol
 }) => {
     let cells = [];
     for(let row = 1; row <= rows; row++)
@@ -40,6 +48,8 @@ const Cells = React.memo(({
                     tabIndex="0"
                     role="button"
                     enabled={enabled}
+                    aria-disabled={!enabled}
+                    aria-label={getAriaLabel(symbol, playerSymbol, row, col)}
                     onClick={() => !symbol && enabled ? onClick(row, col) : null} >
                         <AnimationRendering 
                             symbol={symbol} 

@@ -77,7 +77,9 @@ const Home = () => {
             enabled={isTurn}
             onClick={(row, col) => {
               handleClick(row, col, symbol)
-            }} />
+            }} 
+            playerSymbol={symbol}
+            />
         </Game>
         <Invite>
           <InviteComponent

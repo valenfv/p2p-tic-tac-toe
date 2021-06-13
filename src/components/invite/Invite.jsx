@@ -28,6 +28,7 @@ const CopyButton = React.memo(({ textToCopy }) => (
         <Button 
             tooltipText="Copy to clipboard"
             Icon={<CopyClipboard />} 
+            aria-label="Copy to clipboard"
         />
     </CopyToClipboard>
 ));
@@ -76,6 +77,7 @@ const Invite = React.memo(({
                     RightAddon={ !invited ? <CopyButton textToCopy={`${window.location.host}/?friend=${myId}`} /> : <NewGameLink />}
                     value={!invited ? (myId ? `${window.location.host}/?friend=${myId}` : `Generating connection...`) : `You are currently in a game...`}
                     readOnly
+                    aria-label="Invitation link"
                 />
             }
             flexGrow={10}
