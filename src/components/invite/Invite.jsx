@@ -3,6 +3,8 @@ import Input from '../input/Input';
 import Button from '../button/Button';
 import CopyClipboard from '../icons/CopyClipboard'
 import styled from 'styled-components'
+import { CopyToClipboard } from 'react-copy-to-clipboard';
+
 
 const InviteContainer = styled.div`
     display: flex;
@@ -36,7 +38,17 @@ const LabelValue = ({
     );
 };
 
+const CopyButton = ({ textToCopy }) => (
+    <CopyToClipboard text={textToCopy}>
+        <Button 
+            tooltipText="Copy to clipboard"
+            Icon={<CopyClipboard />} 
+        />
+    </CopyToClipboard>
+);
+
 const Invite = ({
+    invited,
     myId,
     symbolIcon = null,
 }) => {
@@ -53,12 +65,10 @@ const Invite = ({
             />
             <LabelValue 
                 label="Invite your friend"
-                value={
+                value={ 
                     <Input 
-                        rightAddon={<Button 
-                                        onClick={() => navigator.clipboard.writeText(`${window.location.host}/?friend=${myId}`)}
-                                        icon={<CopyClipboard />} />}
-                        value={myId ? `${window.location.host}/?friend=${myId}` : `Generating connection...`}
+                        RightAddon={ !invited ? <CopyButton textToCopy={`${window.location.host}/?friend=${myId}`} /> : <a href={`${window.location.protocol}//${window.location.href.split('/')[2]}`}>New Game</a>}
+                        value={!invited ? (myId ? `${window.location.host}/?friend=${myId}` : `Generating connection...`) : `You are currently on a game...`}
                         readOnly
                     />
                 }

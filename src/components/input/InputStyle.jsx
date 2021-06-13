@@ -19,8 +19,6 @@ const InputTag = styled.input`
 `;
 
 const RightIconContainer = styled.span`
-    width: 30px;
-    height: 30px;
     box-sizing: border-box;
 `;
 

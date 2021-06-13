@@ -1,14 +1,11 @@
-import React, { useState, useCallback, useEffect } from 'react';
-import Board from './components/board/Board'
-import { getTicTacToeFormat, determineMatch } from './utils';
-import { symbols } from './enums'
-import useP2P from './hooks/useP2P';
-
-
-import TurnControl from './components/control/TurnControl'
-import InviteComponent from './components/invite/Invite';
-import Circle from './components/icons/Circle'
-import Cross from './components/icons/Cross'
+import React from 'react';
+import Board from '../../components/board/Board'
+import { symbols } from '../../enums'
+import TurnControl from '../../components/control/TurnControl'
+import InviteComponent from '../../components/invite/Invite';
+import Circle from '../../components/icons/Circle'
+import Cross from '../../components/icons/Cross'
+import { useHomeLogic } from './useHomeLogic';
 
 import {
   HomeLayout,
@@ -16,12 +13,7 @@ import {
   Control,
   Game,
   Invite,
-} from './styles/HomeStyle'
-
-const getFriendId = () => {
-  const urlParams = new URLSearchParams(window.location.search);
-  return urlParams.get('friend');
-};
+} from './HomeStyle'
 
 const inviteIcon = (symbol) => {
   if(!symbol) return(<b>TBD</b>);
@@ -37,54 +29,18 @@ const inviteIcon = (symbol) => {
   ); 
 }
 
-const App = () => {
-  const [boardState, setBoardState] = useState([])
-  const [lastMove, setLastMove] = useState({});
-  const [xScore, setXScore] = useState(0);
-  const [oScore, setOScore] = useState(0);
-
-  const {
-    peer,
+const Home = () => {
+  const [
+    boardState,
+    xScore,
+    oScore,
+    peerId,
     status,
     symbol,
     isTurn,
-    update,
-  } = useP2P(getFriendId(), lastMove);
-
-  const handleClick = useCallback(
-      (row, col, symbol) => {
-        const move = getTicTacToeFormat(row, col, symbol);
-        setLastMove(move)
-        return setBoardState([...(boardState.concat(move))])
-      }
-  , [boardState]);
-
-  useEffect(() => {
-    if(update){
-      setBoardState(prev => [...prev.concat(update)]);
-    } 
-  }, [update])
-
-  useEffect(() => {
-    const match = determineMatch(boardState);
-    console.log("GAME MATCH RESULT: ", match);
-    setTimeout(() => {
-      if(boardState.length === 9 && !match){
-        setBoardState([]);
-      }else{
-        if(match){
-          setBoardState([]);
-          window.emojisplosion({
-            emojiCount: 100,
-          });
-        }
-        if(match === symbols.CROSS)
-          setXScore(prev => prev + 1)
-        if(match === symbols.CIRCLE)
-          setOScore(prev => prev + 1)
-      }
-    }, 1000);
-  }, [boardState])
+    invited,
+    handleClick,
+] = useHomeLogic();
 
   return (
     <>
@@ -124,8 +80,9 @@ const App = () => {
             }} />
         </Game>
         <Invite>
-          <InviteComponent 
-            myId={peer?.id} 
+          <InviteComponent
+            invited={invited} 
+            myId={peerId} 
             status={status}
             symbolIcon={inviteIcon(symbol)}
           />
@@ -135,4 +92,4 @@ const App = () => {
   );
 }
 
-export default App;
+export default Home;

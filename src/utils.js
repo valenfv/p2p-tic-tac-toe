@@ -48,7 +48,11 @@ const isWinner = (symbol, board) => {
 
                 (board[0][0]?.symbol?.symbol === symbol &&
                 board[1][1]?.symbol?.symbol === symbol &&
-                board[2][2]?.symbol?.symbol === symbol);
+                board[2][2]?.symbol?.symbol === symbol) ||
+
+                (board[0][2]?.symbol?.symbol === symbol &&
+                board[1][1]?.symbol?.symbol === symbol &&
+                board[2][0]?.symbol?.symbol === symbol);
     }
 
 };

@@ -6,7 +6,7 @@ import {
 } from './InputStyle';
 
 const Input = ({
-    rightAddon = null,
+    RightAddon = null,
     value,
     onChange,
     disabled = false,
@@ -23,7 +23,7 @@ const Input = ({
                 width={width}
             />
             <RightIconContainer>
-                { rightAddon }
+                { RightAddon }
             </RightIconContainer>
         </InputContainer>
     )

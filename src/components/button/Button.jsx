@@ -3,18 +3,25 @@ import {
     ButtonStyled,
     IconButton,
 } from './ButtonStyle';
+import ReactTooltip from 'react-tooltip';
+
 
 const Button = ({
-    icon,
+    Icon,
     title = '',
+    tooltipText = null,
     onClick = () => null
 }) => {
     return (
-        <IconButton 
-            title={title}
-            onClick={onClick}>
-            { icon }
-        </IconButton>
+        <>
+            { tooltipText && <ReactTooltip place="top" type="dark" effect="solid"/> }
+            <IconButton 
+                data-tip={tooltipText}
+                title={title}
+                onClick={onClick}>
+                { Icon }
+            </IconButton>
+        </>
     )
 }
 
