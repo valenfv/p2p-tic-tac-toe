@@ -25,7 +25,7 @@ const getAriaLabel = (cellSymbol, playerSymbol, row, col) => {
         return `play a ${playerSymbol === symbols.CIRCLE ? `circle` : `cross`} on row ${row + 1} and column ${col + 1}`;
     if(!playerSymbol)
         return `board cell, waiting for a friend to connect`;
-    return `board cell at row ${row + 1} and column ${col + 1} not available, there is currently a ${playerSymbol === symbols.CIRCLE ? `circle` : `cross`} in there`;
+    return `board cell at row ${row + 1} and column ${col + 1} not available, there is currently a ${cellSymbol === symbols.CIRCLE ? `circle` : `cross`} in there`;
 }
 
 const Cells = React.memo(({ 
