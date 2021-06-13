@@ -16,7 +16,7 @@ const Board = React.memo(({
     playerSymbol,
 }) => (
     <BoardTable width={width} height={height}>
-        <BoardLayout rows={rows} cols={cols} aria-live="polite">
+        <BoardLayout rows={rows} cols={cols}>
             <Cells
                 rows={rows}
                 cols={cols}
