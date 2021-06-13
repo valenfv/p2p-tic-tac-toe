@@ -18,6 +18,7 @@ export default (friendId, lastMove) => {
         });
         newPeer.on('connection', (conn) => {
             setConnection(conn);
+            setStatus(p2pStatus.READY);
         });
     }, []);
 
@@ -46,8 +47,7 @@ export default (friendId, lastMove) => {
 
     // STABLISH THE LISTENERS
     useEffect(() => {
-        if(connection)
-
+        if(connection){
             connection.on('data', (data) => {
                 if(data?.type === 'raffle'){
                     if(data?.number % 2 === 0){
@@ -65,6 +65,11 @@ export default (friendId, lastMove) => {
                     setSymbol(data?.symbol);
                 }
             });
+            connection.on('close', () => {
+                setStatus(p2pStatus.DISCONNECTED);
+            });
+        }
+        return () => connection?.close();
     }, [connection])
 
     useEffect(() => {
@@ -76,6 +81,7 @@ export default (friendId, lastMove) => {
             });
         }
     }, [lastMove])
+
 
     return {
         peer,

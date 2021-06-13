@@ -1,6 +1,6 @@
 import { useEffect, useState, useCallback } from 'react';
 import { getTicTacToeFormat, determineMatch } from '../../utils';
-import { symbols } from '../../enums'
+import { p2pStatus, symbols } from '../../enums'
 import useP2P from '../../hooks/useP2P';
 
 const getFriendId = () => {
@@ -53,8 +53,16 @@ const useHomeLogic = () => {
           if(match === symbols.CIRCLE)
             setOScore(prev => prev + 1)
         }
-      }, 1000);
+      }, 500);
     }, [boardState])
+
+    useEffect(() => {
+      if(status === p2pStatus.DISCONNECTED){
+        setBoardState([]);
+        setXScore(0)
+        setOScore(0)
+      }
+    }, [status]);
 
     return [
         boardState,

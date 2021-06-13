@@ -7,25 +7,23 @@ import {
 } from './TurnControlStyled';
 
 
-const TurnControl = ({
+const TurnControl = React.memo(({
     isTurn = false,
     score = '-',
     RightSymbol = undefined,
     body,
-}) => {
-    return (
-        <Card isTurn={isTurn}>
-            <Icon>
-                { RightSymbol }
-            </Icon>
-            <Body>
-                { isTurn && body }
-            </Body>
-            <Score>
-                { score }
-            </Score>
-        </Card>
-    )
-}
+}) => (
+    <Card isTurn={isTurn}>
+        <Icon>
+            { RightSymbol }
+        </Icon>
+        <Body>
+            { isTurn && body }
+        </Body>
+        <Score>
+            { score }
+        </Score>
+    </Card>
+));
 
 export default TurnControl

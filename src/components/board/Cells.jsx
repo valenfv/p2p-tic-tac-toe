@@ -1,3 +1,4 @@
+import React from 'react';
 import Cross from '../icons/Cross';
 import Circle from '../icons/Circle';
 import IconTransition from '../icons/IconTransition';
@@ -7,7 +8,7 @@ import {
 import { getSymbolInfo } from '../../utils';
 import { symbols } from '../../enums';
 
-const AnimationRendering = (props) => {
+const AnimationRendering = React.memo((props) => {
     let Render = props.symbol ? (
             props.symbol.symbol === symbols.CROSS ? 
                 <Cross /> : 
@@ -17,10 +18,16 @@ const AnimationRendering = (props) => {
         <IconTransition>
             { Render }
         </IconTransition> : Render;
-}
+});
 
 
-export default (rows, cols, boardState, onClick, enabled) => {
+const Cells = React.memo(({ 
+    rows, 
+    cols, 
+    boardState, 
+    onClick, 
+    enabled 
+}) => {
     let cells = [];
     for(let row = 1; row <= rows; row++)
         for(let col = 1; col <= cols; col++){
@@ -41,4 +48,6 @@ export default (rows, cols, boardState, onClick, enabled) => {
             );
         }
     return cells;
-};
+});
+
+export default Cells;

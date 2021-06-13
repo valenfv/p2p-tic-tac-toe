@@ -2,15 +2,22 @@ import React from 'react'
 import {
     StyledLink
 } from './LinkStyled';
+import ReactTooltip from 'react-tooltip';
 
-const Link = ({
-    href,
-    onClick = () => null,
+const Link = React.memo(({
     tooltipText = null,
-}) => {
-    return (
-        
-    )
-}
+    children,
+    ...other
+}) => (
+    <>
+        { tooltipText && <ReactTooltip place="top" type="dark" effect="solid"/> }
+        <StyledLink
+            data-tip={tooltipText}
+            {...other}
+        >
+            { children }
+        </StyledLink>
+    </>
+));
 
 export default Link;

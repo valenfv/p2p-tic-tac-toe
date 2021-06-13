@@ -6,23 +6,21 @@ import {
 import ReactTooltip from 'react-tooltip';
 
 
-const Button = ({
+const Button = React.memo(({
     Icon,
     title = '',
     tooltipText = null,
     onClick = () => null
-}) => {
-    return (
-        <>
-            { tooltipText && <ReactTooltip place="top" type="dark" effect="solid"/> }
-            <IconButton 
-                data-tip={tooltipText}
-                title={title}
-                onClick={onClick}>
-                { Icon }
-            </IconButton>
-        </>
-    )
-}
+}) => (
+    <>
+        { tooltipText && <ReactTooltip place="top" type="dark" effect="solid"/> }
+        <IconButton 
+            data-tip={tooltipText}
+            title={title}
+            onClick={onClick}>
+            { Icon }
+        </IconButton>
+    </>
+));
 
 export default Button;

@@ -15,7 +15,7 @@ import {
   Invite,
 } from './HomeStyle'
 
-const inviteIcon = (symbol) => {
+const InviteIcon = React.memo(({ symbol }) => {
   if(!symbol) return(<b>TBD</b>);
   if(symbol === symbols.CROSS)
     return(
@@ -27,7 +27,7 @@ const inviteIcon = (symbol) => {
       <Circle width="24px" height="24px" fill="#545454" />
     </span>
   ); 
-}
+});
 
 const Home = () => {
   const [
@@ -84,7 +84,7 @@ const Home = () => {
             invited={invited} 
             myId={peerId} 
             status={status}
-            symbolIcon={inviteIcon(symbol)}
+            SymbolIcon={<InviteIcon symbol={symbol} />}
           />
         </Invite>
       </HomeLayout>
@@ -92,4 +92,4 @@ const Home = () => {
   );
 }
 
-export default Home;
+export default React.memo(Home);

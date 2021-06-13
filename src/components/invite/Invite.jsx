@@ -7,60 +7,80 @@ import {
     InviteContainer,
     LabelValueContainer,
 } from './InviteStyled';
+import Link from '../link/Link';
+import { p2pStatus } from '../../enums';
 
-const LabelValue = ({
+const LabelValue = React.memo(({
     label = '',
     value = undefined,
     flexGrow = 1
-}) => {
-    return (
-        <LabelValueContainer
-            flexGrow={flexGrow}
-        >
-            <span> {label} </span>
-            { value }
-        </LabelValueContainer>
-    );
-};
+}) => (
+    <LabelValueContainer
+        flexGrow={flexGrow}
+    >
+        <span> {label} </span>
+        { value }
+    </LabelValueContainer>
+));
 
-const CopyButton = ({ textToCopy }) => (
+const CopyButton = React.memo(({ textToCopy }) => (
     <CopyToClipboard text={textToCopy}>
         <Button 
             tooltipText="Copy to clipboard"
             Icon={<CopyClipboard />} 
         />
     </CopyToClipboard>
+));
+
+const NewGameLink = React.memo(() => (
+        <Link
+            href={`${window.location.protocol}//${window.location.href.split('/')[2]}`}
+            tooltipText="Create a new game"
+            style={{ padding: '2px' }}
+        >
+            New
+        </Link>   
+    )
 );
 
-const Invite = ({
+const getStatus = (status) => {
+    switch(status) {
+        case p2pStatus.DISCONNECTED:
+            return "Lost connection";
+        case p2pStatus.NOT_CONNECTED:
+            return "Not connected";
+        case p2pStatus.READY:
+            return "Connected";
+    } 
+};
+
+const Invite = React.memo(({
     invited,
     myId,
-    symbolIcon = null,
-}) => {
-
-    return (
-        <InviteContainer>
-            <LabelValue 
-                label="Connection Status"
-                value={<b>Connected</b>}
-            />
-            <LabelValue 
-                label="Symbol"
-                value={symbolIcon}
-            />
-            <LabelValue 
-                label="Invite your friend"
-                value={ 
-                    <Input 
-                        RightAddon={ !invited ? <CopyButton textToCopy={`${window.location.host}/?friend=${myId}`} /> : <a href={`${window.location.protocol}//${window.location.href.split('/')[2]}`}>New</a>}
-                        value={!invited ? (myId ? `${window.location.host}/?friend=${myId}` : `Generating connection...`) : `You are currently on a game...`}
-                        readOnly
-                    />
-                }
-                flexGrow={10}
-            />
-        </InviteContainer>
-    )
-}
+    SymbolIcon = null,
+    status,
+}) => (
+    <InviteContainer>
+        <LabelValue 
+            label="Connection Status"
+            value={<b>{getStatus(status)}</b>}
+        />
+        <LabelValue 
+            label="Symbol"
+            value={SymbolIcon}
+        />
+        <LabelValue 
+            label="Invite your friend"
+            value={ 
+                <Input 
+                    RightAddon={ !invited ? <CopyButton textToCopy={`${window.location.host}/?friend=${myId}`} /> : <NewGameLink />}
+                    value={!invited ? (myId ? `${window.location.host}/?friend=${myId}` : `Generating connection...`) : `You are currently in a game...`}
+                    readOnly
+                />
+            }
+            flexGrow={10}
+        />
+    </InviteContainer>
+));
 
 export default Invite
