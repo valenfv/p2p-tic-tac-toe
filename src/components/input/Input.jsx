@@ -3,7 +3,7 @@ import {
     InputContainer,
     InputTag,
     RightIconContainer,
-} from './InputStyle';
+} from './InputStyled';
 
 const Input = ({
     RightAddon = null,

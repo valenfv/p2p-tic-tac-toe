@@ -2,26 +2,11 @@ import React, { useState, useEffect } from 'react'
 import Input from '../input/Input';
 import Button from '../button/Button';
 import CopyClipboard from '../icons/CopyClipboard'
-import styled from 'styled-components'
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-
-
-const InviteContainer = styled.div`
-    display: flex;
-    justify-content: space-between;
-    padding: 10px;
-    box-sizing: border-box;
-    background: #FFF;
-    width: 100%;
-    gap: 10px;
-`;
-
-const LabelValueContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    flex-grow: ${prop => prop.flexGrow};
-`;
+import {
+    InviteContainer,
+    LabelValueContainer,
+} from './InviteStyled';
 
 const LabelValue = ({
     label = '',
@@ -67,7 +52,7 @@ const Invite = ({
                 label="Invite your friend"
                 value={ 
                     <Input 
-                        RightAddon={ !invited ? <CopyButton textToCopy={`${window.location.host}/?friend=${myId}`} /> : <a href={`${window.location.protocol}//${window.location.href.split('/')[2]}`}>New Game</a>}
+                        RightAddon={ !invited ? <CopyButton textToCopy={`${window.location.host}/?friend=${myId}`} /> : <a href={`${window.location.protocol}//${window.location.href.split('/')[2]}`}>New</a>}
                         value={!invited ? (myId ? `${window.location.host}/?friend=${myId}` : `Generating connection...`) : `You are currently on a game...`}
                         readOnly
                     />

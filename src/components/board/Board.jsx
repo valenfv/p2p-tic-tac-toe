@@ -3,7 +3,7 @@ import renderCells from './RenderCells';
 import { 
     BoardTable, 
     BoardLayout 
-} from './BoardStyles';
+} from './BoardStyled';
 
 const Board = ({
     onClick = () => {},

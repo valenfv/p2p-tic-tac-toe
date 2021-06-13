@@ -3,7 +3,7 @@ import Circle from '../icons/Circle';
 import IconTransition from '../icons/IconTransition';
 import { 
     BoardCell,  
-} from './BoardStyles';
+} from './BoardStyled';
 import { getSymbolInfo } from '../../utils';
 import { symbols } from '../../enums';
 

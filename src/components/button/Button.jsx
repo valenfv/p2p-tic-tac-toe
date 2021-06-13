@@ -2,7 +2,7 @@ import React from 'react'
 import {
     ButtonStyled,
     IconButton,
-} from './ButtonStyle';
+} from './ButtonStyled';
 import ReactTooltip from 'react-tooltip';
 
 

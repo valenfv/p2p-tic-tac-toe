@@ -4,7 +4,7 @@ import {
     Icon,
     Body,
     Score,
-} from './TurnControlStyles';
+} from './TurnControlStyled';
 
 
 const TurnControl = ({
